@@ -22,8 +22,19 @@ var title_text = document.getElementById("title_text")
 var timer_exercises_text = document.getElementById("timer_exercises_text")
 var timer_rounds_text = document.getElementById("timer_rounds_text")
 
+var exerciseinput = document.getElementById("exerciseinput")
+
 var exercisecount = document.getElementById('exercisecount')
 var roundcount = document.getElementById('roundcount')
+
+function exerciseOption(num, arg) {
+    if (arg == 1) {
+        exerciseinput.innerHTML += `<div id='exercise_${num}_div'><br><p>Exercise ${num}:</p><input id='exercise_${num}'><br><div>`
+    } else {
+        var tag = document.getElementById(`exercise_${num}_div`)
+        tag.remove()
+    }
+}
 
 function increaseValue(arg) {
     stop_time()
@@ -38,6 +49,7 @@ function increaseValue(arg) {
     if (arg == 0) {
         var value = parseInt(document.getElementById('exercisecount').value, 10);
         value++;
+        exerciseOption(value, 1)
         document.getElementById('exercisecount').value = value;
     } else {
         var value = parseInt(document.getElementById('roundcount').value, 10);
@@ -63,6 +75,7 @@ function decreaseValue(arg) {
         if (value <= 0) {
             value = 0
         } else {
+            exerciseOption(value, 0)
             value--;
         }
         exercisecount.value = value;
@@ -153,7 +166,7 @@ function runTime() {
         second += 60
         minute -=1
     } 
-    title_text.innerHTML = sldr[pos][5]+" - Exercise "+(exerciseinit+1)
+    title_text.innerHTML = sldr[pos][5]+" - "+(exercise_list[exerciseinit])
 }
 
 
@@ -179,6 +192,7 @@ function stop_time() {
 }
 
 var active = 1
+var exercise_list = []
 function start_time() { 
     trigger_button.setAttribute("onclick", "stop_time()");
     trigger_button.innerHTML = "Stop Time"
@@ -186,6 +200,15 @@ function start_time() {
     if ((initiate != 1) || (active == 1)) {
         document.getElementById("audiobut").load()
         active = 0
+
+        for (var i = 1; i <= parseInt(document.getElementById('exercisecount').value); i++) {
+            if ((document.getElementById(`exercise_${i}`).value) == '') {
+                exercise_list.push(`Exercise ${i}`)
+            } else {
+                exercise_list.push((document.getElementById(`exercise_${i}`).value))
+            }
+        }
+
         sldrarr = [
             [
                 [sldr[0][2].value, sldr[0][2].value], 
