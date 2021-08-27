@@ -105,6 +105,7 @@ var refreshIntervalId;
 var pos = 0;
 var exerciseinit = 0
 var roundinit = 0;
+var playaudio = 0
 function runTime() {
     if (roundinit >= roundcount.value) {
         pos = parseInt(sldr.length)
@@ -114,12 +115,14 @@ function runTime() {
      }
 
      if ((parseInt(sldrarr[pos][0][1]) <= 0) && (parseInt(sldrarr[pos][1][1]) == 5)) {
+        playaudio = 1
         document.getElementById("audiobut").play()
     }
 
     timer_exercises_text.innerHTML = "Exercises: "+exerciseinit+" / "+exercisecount.value
     timer_rounds_text.innerHTML = "Rounds: "+roundinit+" / "+roundcount.value
     if ((parseInt(sldrarr[pos][0][1]) <= 0) && (parseInt(sldrarr[pos][1][1]) <= 0)) {
+        playaudio = 0
         pos +=1
     }
 
@@ -157,6 +160,7 @@ function runTime() {
 
 var initiate = 0;
 function stop_time() {
+    document.getElementById("audiobut").pause()
     trigger_button.setAttribute("onclick", "start_time()");
     trigger_button.innerHTML = "Start Time"
     if ((roundinit>=roundcount.value) && (pos >= sldr.length)) {
@@ -179,9 +183,8 @@ function start_time() {
     trigger_button.setAttribute("onclick", "stop_time()");
     trigger_button.innerHTML = "Stop Time"
     
-    document.getElementById("audiobut").load()
-    
     if ((initiate != 1) || (active == 1)) {
+        document.getElementById("audiobut").load()
         active = 0
         sldrarr = [
             [
@@ -193,6 +196,10 @@ function start_time() {
                 [sldr[1][3].value, sldr[1][3].value]
             ]                
         ]
+    } else {
+        if (playaudio == 1) {
+            document.getElementById("audiobut").play()
+        }
     }
 
     refreshIntervalId = setInterval(runTime, 1000);
