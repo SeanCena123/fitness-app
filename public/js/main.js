@@ -105,7 +105,8 @@ function eventFire(el, etype){
 }
 
 function audioplay() {
-    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3');  
+    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3'); 
+    audio.load(); 
     audio.autoplay = true;
     audio.play(); 
 }
