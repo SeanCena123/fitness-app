@@ -94,13 +94,27 @@ function reset() {
 }
 reset()
 
+function eventFire(el, etype){
+    if (el.fireEvent) {
+      el.fireEvent('on' + etype);
+    } else {
+      var evObj = document.createEvent('Events');
+      evObj.initEvent(etype, true, false);
+      el.dispatchEvent(evObj);
+    }
+}
+
+function audioplay() {
+    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3');  
+    audio.autoplay = true;
+    audio.play(); 
+}
+
 var refreshIntervalId;
 var pos = 0;
 var exerciseinit = 0
 var roundinit = 0;
 function runTime() {
-    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3');
-    audio.autoplay = true;
     if (roundinit >= roundcount.value) {
         pos = parseInt(sldr.length)
         exerciseinit = parseInt(exercisecount.value)
@@ -109,7 +123,7 @@ function runTime() {
      }
 
      if ((parseInt(sldrarr[pos][0][1]) <= 0) && (parseInt(sldrarr[pos][1][1]) == 5)) {
-        audio.play();
+        eventFire(document.getElementById('audiobut'), 'click');
     }
 
     timer_exercises_text.innerHTML = "Exercises: "+exerciseinit+" / "+exercisecount.value
