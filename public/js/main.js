@@ -12,6 +12,9 @@ var sldr = [
 var sldrarr;
 
 var start_trigger = 1
+
+var total_time_text = document.getElementById("total_time_text");
+
 var trigger_button = document.getElementById("trigger_button")
 var timer_minute_text = document.getElementById("timer_minute_text")
 var timer_second_text = document.getElementById("timer_second_text")
@@ -41,6 +44,8 @@ function increaseValue(arg) {
         value++;
         document.getElementById('roundcount').value = value;       
     }
+
+    totalTime()
 }
 
 function decreaseValue(arg) {
@@ -70,6 +75,8 @@ function decreaseValue(arg) {
         }
         roundcount.value = value;       
     }
+
+    totalTime()
 }
 
 
@@ -92,12 +99,17 @@ var pos = 0;
 var exerciseinit = 0
 var roundinit = 0;
 function runTime() {
+    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3');
     if (roundinit >= roundcount.value) {
         pos = parseInt(sldr.length)
         exerciseinit = parseInt(exercisecount.value)
         roundinit = parseInt(roundcount.value)
         return stop_time() 
      }
+
+     if ((parseInt(sldrarr[pos][0][1]) <= 0) && (parseInt(sldrarr[pos][1][1]) == 5)) {
+        audio.play();
+    }
 
     timer_exercises_text.innerHTML = "Exercises: "+exerciseinit+" / "+exercisecount.value
     timer_rounds_text.innerHTML = "Rounds: "+roundinit+" / "+roundcount.value
@@ -207,6 +219,19 @@ function slider_input(i) {
     sldr[i][1].innerHTML = "total seconds: "+sldr[i][0].value
     sldr[i][1].value = sldr[i][0].value
 
+    totalTime()
+
+}
+
+function totalTime() {
+    var a1 = (parseInt(sldr[0][1].value))
+    var a2 = (parseInt(sldr[1][1].value))
+    var a3 = (parseInt(document.getElementById('exercisecount').value))
+    var a4 = (parseInt(document.getElementById('roundcount').value))
+
+    var total_time = (a1+a2)*a3*a4
+    var output = secondstoMinutes(total_time);
+    total_time_text.innerHTML = "Total Workout: "+output[0]+"min & "+output[1]+"sec"
 }
 
 function secondstoMinutes(seconds) {
