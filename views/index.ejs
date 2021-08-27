@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Joma's Starter Template for NodeJs Web App</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/main.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#wan">Button1</a></li>
+            <li><a href="#too">Button2</a></li>
+            <li><a href="#phree">Button3</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div class="starter-template">
+
+        <label for="fname">Work:</label>
+        <div class="slidecontainer">
+          <center>
+            <p id="work_time_total_seconds"></p>
+            <p id="work_time_minutes"></p>
+            <p id="work_time_seconds"></p>
+            <input type="range" min="0" max="181" value="0" class="slider" step="5" id="work_slider" oninput="slider_input(0)" style="width:25%">
+          </center>
+        </div> <br>
+
+        <label for="fname">Rest:</label>
+        <div class="slidecontainer">
+          <center>
+            <p id="rest_time_total_seconds"></p>
+            <p id="rest_time_minutes"></p>
+            <p id="rest_time_seconds"></p>
+            <input type="range" min="0" max="181" value="0" class="slider" step="5" id="rest_slider" oninput="slider_input(1)" style="width:25%">
+          </center>
+        </div> <br>
+
+        <label for="fname">Exercises:</label>
+          <center>
+            <input style="width: 3%;" value="0" id="exercisecount">
+            <button onclick="increaseValue(0)">+</button>
+            <button onclick="decreaseValue(0)">-</button>
+          </center>
+          <br>
+
+          <label for="fname">Rounds:</label>
+          <center>
+            <input style="width: 3%;" value="0" id="roundcount">
+            <button onclick="increaseValue(1)">+</button>
+            <button onclick="decreaseValue(1)">-</button>
+          </center>
+          <br>
+
+       <button type="button" id="trigger_button" onclick="start_time()">Start Time</button> <br> <br>    
+
+        
+        <h1 id="title_text"></h1>
+        <h1 id="timer_minute_text"></h1>
+        <h1 id="timer_second_text"></h1>
+        <h1 id="timer_exercises_text"></h1>
+        <h1 id="timer_rounds_text"></h1>
+        <!-- <progress value="0" id="progressBar"></progress> -->
+
+
+      </div>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-2.3.0.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
