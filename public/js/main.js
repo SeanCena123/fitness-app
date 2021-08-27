@@ -94,22 +94,12 @@ function reset() {
 }
 reset()
 
-function eventFire(el, etype){
-    if (el.fireEvent) {
-      el.fireEvent('on' + etype);
-    } else {
-      var evObj = document.createEvent('Events');
-      evObj.initEvent(etype, true, false);
-      el.dispatchEvent(evObj);
-    }
-}
-
-function audioplay() {
-    var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3'); 
-    audio.load(); 
-    audio.autoplay = true;
-    audio.play(); 
-}
+// function audioplay() {
+//     var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3'); 
+//     audio.load(); 
+//     audio.autoplay = true;
+//     audio.play(); 
+// }
 
 var refreshIntervalId;
 var pos = 0;
@@ -124,7 +114,7 @@ function runTime() {
      }
 
      if ((parseInt(sldrarr[pos][0][1]) <= 0) && (parseInt(sldrarr[pos][1][1]) == 5)) {
-        eventFire(document.getElementById('audiobut'), 'click');
+        document.getElementById("audiobut").play()
     }
 
     timer_exercises_text.innerHTML = "Exercises: "+exerciseinit+" / "+exercisecount.value
@@ -188,6 +178,8 @@ var active = 1
 function start_time() { 
     trigger_button.setAttribute("onclick", "stop_time()");
     trigger_button.innerHTML = "Stop Time"
+    
+    document.getElementById("audiobut").load()
     
     if ((initiate != 1) || (active == 1)) {
         active = 0
