@@ -100,6 +100,7 @@ var exerciseinit = 0
 var roundinit = 0;
 function runTime() {
     var audio = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-clock-countdown-bleeps-916.mp3');
+    audio.autoplay = true;
     if (roundinit >= roundcount.value) {
         pos = parseInt(sldr.length)
         exerciseinit = parseInt(exercisecount.value)
